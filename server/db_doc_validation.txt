@@ -1,0 +1,99 @@
+// 'users' collection document validation
+db.createCollection('users', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['email', 'password', 'role'],
+      properties: {
+        email: {
+          type: 'string',
+          description: 'email for authentication, unique'
+        },
+        password: { type: 'string' },
+        role: {
+          type: 'string',
+          description: 'role: admin or user'
+        },
+        first_name: {
+          type: 'string',
+          description: 'users first name'
+        },
+        last_name: {
+          type: 'string',
+          description: 'users last name'
+        },
+        address: {
+          type: 'object',
+          description: 'users address: city and zipcode',
+          properties: {
+            city: { type: 'string' },
+            zipcode: { type: 'string' }
+          }
+        }
+      }
+    }
+  }
+})
+
+
+// 'articles' collection document validation
+db.createCollection('articles', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['title', 'content', 'date', 'preview_image'],
+      properties: {
+        title: {
+          type: 'string',
+          description: 'articles title, unique'
+        },
+        content: { type: 'string' },
+        date: {
+          type: 'string',
+          description: 'date of publishing'
+        },
+        preview_image: {
+          type: 'string',
+          description: 'background image for articles title'
+        }
+      }
+    }
+  }
+})
+
+
+// 'products' collection document validation
+db.createCollection('products', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['name', 'description', 'price', 'category', 'sizes', 'image',
+        'code'],
+      properties: {
+        name: { type: 'string' },
+        description: { type: 'string' },
+        price: { type: 'string' },
+        category: { type: 'string' },
+        sizes: {
+          type: 'array',
+          uniqueItems: true
+        },
+        image: { type: 'string' },
+        code: { type: 'string' }
+      }
+    }
+  }
+})
+
+// 'gallery' collection dicument validation
+db.createCollection('gallery', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      required: ['image'],
+      properties: {
+        image: { type: 'string' },
+      }
+    }
+  }
+})
