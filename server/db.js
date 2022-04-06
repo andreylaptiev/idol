@@ -8,7 +8,7 @@ const url = process.env.DB_SERVER;
 const db = process.env.DB_NAME;
 
 // connection URI
-const uri = `mongodb://${user}:${password}@${url}/?authSource=${db}`;
+const uri = `mongodb://${user}:${password}@${url}/${db}`;
 
 // create and export a new MongoClient
 module.exports = new MongoClient(uri);
