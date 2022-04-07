@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const galleryController = require('../../controllers/galleryController');
 
-// list of all images here
+// list all images
 router.get('/', (req, res) => {
   res.send('Admin -> Gallery');
 });
 
-// upload new image button
-router.post('/',);
+// upload new image
+router.post('/upload', galleryController.uploadImage);
 
-// delete existing image button
-router.delete('/',);
+// delete existing image
+router.post('/delete', galleryController.deleteImage);
 
 module.exports = router;
