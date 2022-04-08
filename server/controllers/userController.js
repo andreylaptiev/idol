@@ -29,7 +29,6 @@ class UserController {
       const collection = client.db('idol').collection('users');
       const query = { email: email };
       const checkEmail = await collection.findOne(query);
-
       if (checkEmail) {
         throw new Error('User with specified email already exists');
       }
@@ -52,8 +51,46 @@ class UserController {
     }
   }
 
-  async login(req, res) {
-    // GET and POST requests are handled here
+  async login(req, res, next) {
+    // GET request handler
+    if (req.method === 'GET') {
+      res.send('login page');
+      return;
+    }
+
+    // POST request handler
+    if (req.method === 'POST') {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return next(new Error('No email or password specified'));
+      }
+
+      try {
+        // get user from database
+        const collection = client.db('idol').collection('users');
+        const query = { email: email };
+        const user = await collection.findOne(query);
+        if (!user) {
+          throw new Error('No user found with specified email');
+        }
+
+        // check if passwords match
+        const comparePassword = await bcrypt.compare(password, user.password);
+        if (!comparePassword) {
+          throw new Error('Wrong password');
+        }
+
+        // generate users token
+        const token = generateJwt(user.email, user.role);
+
+        res.send({ token });
+      } catch(err) {
+        next(err);
+      } finally {
+        return;
+      }
+    }
   }
 
   async checkAuth() {}
