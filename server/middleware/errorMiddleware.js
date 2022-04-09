@@ -7,5 +7,5 @@ module.exports = function(err, req, res, next) {
     return res.json({ code: err.status, message: err.message });
   }
   console.error(err.stack);
-  return res.send('Unexpected Error!');
+  return res.send(err.message || 'Unexpected Error!');
 }
