@@ -92,8 +92,6 @@ class UserController {
       }
     }
   }
-
-  async checkAuth() {}
 }
 
 module.exports = new UserController();
