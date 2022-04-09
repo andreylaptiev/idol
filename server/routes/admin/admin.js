@@ -4,7 +4,9 @@ const articlesRouter = require('./articlesRouter');
 const galleryRouter = require('./galleryRouter');
 const productsRouter = require('./productsRouter');
 const PageNotFoundError = require('../../errors/PageNotFoundError');
+const authMiddleware = require('../../middleware/authMiddleware');
 
+router.use(authMiddleware);
 router.use('/articles', articlesRouter);
 router.use('/gallery', galleryRouter);
 router.use('/products', productsRouter);
