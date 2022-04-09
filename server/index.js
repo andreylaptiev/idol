@@ -6,7 +6,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin/admin');
-const errorHandler = require('./middleware/errorHandler');
+const errorMiddleware = require('./middleware/errorMiddleware');
 
 const HOST = process.env.HOST || localhost;
 const PORT = process.env.PORT || 5000;
@@ -22,7 +22,7 @@ app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 
 // error handling middleware
-app.use(errorHandler);
+app.use(errorMiddleware);
 
 const start = async () => {
   try {
