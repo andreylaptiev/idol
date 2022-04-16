@@ -1,6 +1,7 @@
 const client = require('../db'); // mongodb instance
 const { rm } = require('fs/promises');
 const path = require('path');
+const generateId = require('../utils/generateId');
 
 class GalleryController {
   async uploadImage(req, res, next) {
@@ -13,7 +14,8 @@ class GalleryController {
 
       // add image to database
       const collection = client.db('idol').collection('gallery');
-      const query = { image: imageName };
+      const id = await generateId();
+      const query = { _id: id, image: imageName };
       const insertImage = await collection.insertOne(query);
 
       // respond if success
@@ -24,24 +26,22 @@ class GalleryController {
     }
   }
 
-  async getAllImages() {}
-
   async deleteImage(req, res, next) {
     try {
-      // get images name from hidden input
-      const imageName = req.body.imagename;
+      // get images id from hidden input
+      const imageid = req.body.imageid;
 
       // find and delete image from database
       const collection = client.db('idol').collection('gallery');
-      const query = { image: imageName };
+      const query = { _id: imageid };
       const image = await collection.findOne(query);
       const deleteImage = await collection.deleteOne(image);
 
       // remove image file from storage
-      const storage = path.resolve(__dirname, '../static/gallery', imageName);
+      const storage = path.resolve(__dirname, '../static/gallery', image.image);
       const removeImage = await rm(storage);
-      
-      res.send(`Deleted successfully: ${imageName}`);
+
+      res.send(`Deleted successfully: ${image.image}`);
     } catch(err) {
       next(err);
     }
