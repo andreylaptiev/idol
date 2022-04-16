@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const client = require('../db'); // mongodb client
 const jwt = require('jsonwebtoken');
+const generateId = require('../utils/generateId');
 
 function generateJwt(email, role) {
   const jwtToken = jwt.sign(
@@ -13,6 +14,13 @@ function generateJwt(email, role) {
 
 class UserController {
   async signup(req, res, next) {
+    // GET request handler
+    if (req.method === 'GET') {
+      res.send('signup page');
+      return;
+    }
+
+    // POST request handler
     // default role for new signup
     const ROLE = 'user';
 
@@ -37,7 +45,13 @@ class UserController {
       const hashedPassword = await bcrypt.hash(password, 5);
 
       // insert new user into database
-      const user = { email: email, password: hashedPassword, role: ROLE };
+      const id = await generateId();
+      const user = {
+        _id: id,
+        email: email,
+        password: hashedPassword,
+        role: ROLE
+      };
       const insertUser = await collection.insertOne(user);
 
       // generate users token
