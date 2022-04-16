@@ -5,6 +5,7 @@ db.createCollection('users', {
       bsonType: 'object',
       required: ['email', 'password', 'role'],
       properties: {
+        _id: { type: 'string' },
         email: {
           type: 'string',
           description: 'email for authentication, unique'
@@ -43,6 +44,7 @@ db.createCollection('articles', {
       bsonType: 'object',
       required: ['title', 'content', 'date', 'preview_image'],
       properties: {
+        _id: { type: 'string' },
         title: {
           type: 'string',
           description: 'articles title, unique'
@@ -70,6 +72,7 @@ db.createCollection('products', {
       required: ['name', 'description', 'price', 'category', 'sizes', 'image',
         'code'],
       properties: {
+        _id: { type: 'string' },
         name: { type: 'string' },
         description: { type: 'string' },
         price: { type: 'string' },
@@ -92,6 +95,7 @@ db.createCollection('gallery', {
       bsonType: 'object',
       required: ['image'],
       properties: {
+        _id: { type: 'string' },
         image: { type: 'string' },
       }
     }
