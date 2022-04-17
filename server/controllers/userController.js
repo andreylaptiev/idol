@@ -14,10 +14,8 @@ function generateJwt(id, email, role) {
 
 class UserController {
   async signup(req, res, next) {
-    // GET request handler
-    if (req.method === 'GET') {
-      res.send('signup page');
-      return;
+    if (req.method !== 'POST') {
+      return next(new Error(`Error: ${req.method} request is not supported`));
     }
 
     // POST request handler
@@ -54,10 +52,7 @@ class UserController {
       };
       const insertUser = await collection.insertOne(user);
 
-      // generate users token
-      const token = generateJwt(user.email, user.role);
-
-      res.json({ token });
+      res.json({ message: `Successful sign up: ${email}` });
     } catch(err) {
       next(err);
     } finally {
@@ -71,35 +66,35 @@ class UserController {
     }
 
     // POST request handler
-      const { email, password } = req.body;
+    const { email, password } = req.body;
 
-      if (!email || !password) {
-        return next(new Error('No email or password specified'));
+    if (!email || !password) {
+      return next(new Error('No email or password specified'));
+    }
+
+    try {
+      // get user from database
+      const collection = client.db('idol').collection('users');
+      const query = { email: email };
+      const user = await collection.findOne(query);
+      if (!user) {
+        throw new Error('No user found with specified email');
       }
 
-      try {
-        // get user from database
-        const collection = client.db('idol').collection('users');
-        const query = { email: email };
-        const user = await collection.findOne(query);
-        if (!user) {
-          throw new Error('No user found with specified email');
-        }
-
-        // check if passwords match
-        const comparePassword = await bcrypt.compare(password, user.password);
-        if (!comparePassword) {
-          throw new Error('Wrong password');
-        }
+      // check if passwords match
+      const comparePassword = await bcrypt.compare(password, user.password);
+      if (!comparePassword) {
+        throw new Error('Wrong password');
+      }
 
       // generate token with info about user
       const token = generateJwt(user._id, user.email, user.role);
 
       res.json({ token });
-      } catch(err) {
-        next(err);
-      } finally {
-        return;
+    } catch(err) {
+      next(err);
+    } finally {
+      return;
     }
   }
 }
