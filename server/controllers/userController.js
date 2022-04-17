@@ -66,14 +66,11 @@ class UserController {
   }
 
   async login(req, res, next) {
-    // GET request handler
-    if (req.method === 'GET') {
-      res.send('login page');
-      return;
+    if (req.method !== 'POST') {
+      return next(new Error(`Error: ${req.method} request is not supported`));
     }
 
     // POST request handler
-    if (req.method === 'POST') {
       const { email, password } = req.body;
 
       if (!email || !password) {
@@ -95,15 +92,14 @@ class UserController {
           throw new Error('Wrong password');
         }
 
-        // generate users token
-        const token = generateJwt(user.email, user.role);
+      // generate token with info about user
+      const token = generateJwt(user._id, user.email, user.role);
 
-        res.send({ token });
+      res.json({ token });
       } catch(err) {
         next(err);
       } finally {
         return;
-      }
     }
   }
 }
