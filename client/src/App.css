@@ -8,12 +8,22 @@
   src: url("./assets/fonts/Montserrat-Bold.woff2") format("woff2");
 }
 
+::selection {
+  background: #000;
+  color: #fff;
+}
+
 body {
   background-color: #fff;
   color: #000;
   font-family: 'Montserrat-Regular', sans-serif;
   font-weight: 400;
   font-size: 1.6rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat-Bold", sans-serif;
+  font-weight: 700;
 }
 
 .app {
@@ -24,6 +34,10 @@ body {
   max-width: 1300px;
   min-height: 100%;
   padding: 0 20px;
+}
+
+.main {
+  background-color: inherit;
 }
 
 @media (min-width: 768px) {
