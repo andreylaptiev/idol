@@ -3,9 +3,9 @@ const client = require('../db'); // mongodb client
 const jwt = require('jsonwebtoken');
 const generateId = require('../utils/generateId');
 
-function generateJwt(email, role) {
+function generateJwt(id, email, role) {
   const jwtToken = jwt.sign(
-    { email, role },
+    { id, email, role },
     process.env.SECRET_KEY,
     { expiresIn: '1h' }
   );
