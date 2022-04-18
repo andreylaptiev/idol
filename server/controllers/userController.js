@@ -84,13 +84,16 @@ class UserController {
       // check if passwords match
       const comparePassword = await bcrypt.compare(password, user.password);
       if (!comparePassword) {
-        throw new Error('Wrong password');
+        throw new Error('Wrong email or password');
       }
 
       // generate token with info about user
       const token = generateJwt(user._id, user.email, user.role);
 
-      res.json({ token });
+      res.json({
+        message: `Loged In successfully: ${user.email}`,
+        token: token
+      });
     } catch(err) {
       next(err);
     } finally {
