@@ -1,0 +1,9 @@
+.activeLink {
+  font-weight: 700;
+}
+
+.navbar {
+  display: flex;
+  gap: 30px;
+  font-size: 2rem;
+}

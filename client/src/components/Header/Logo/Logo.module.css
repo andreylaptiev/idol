@@ -1,0 +1,11 @@
+.logo {
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    font-size: 5rem;
+  }
+}
