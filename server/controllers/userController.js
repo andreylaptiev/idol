@@ -55,8 +55,6 @@ class UserController {
       res.json({ message: `Successful sign up: ${email}` });
     } catch(err) {
       next(err);
-    } finally {
-      return;
     }
   }
 
@@ -96,8 +94,6 @@ class UserController {
       });
     } catch(err) {
       next(err);
-    } finally {
-      return;
     }
   }
 }
