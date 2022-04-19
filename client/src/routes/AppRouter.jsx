@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import App from '../App'
+import Home from './Home';
 // public routes
 import Auth from './Auth';
 import Gallery from './Gallery';
@@ -15,7 +15,7 @@ import AdminProducts from './Admin/AdminProducts'
 function AppRouter() {
   return (
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route path="/" element={<Home />}>
         <Route path="news" element={<News />} />
         <Route path="gallery" element={<Gallery />} />
         <Route path="shop" element={<Shop />} />

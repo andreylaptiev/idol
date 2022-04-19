@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Montserrat-Regular";
-  src: url("./assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  src: url("../../assets/fonts/Montserrat-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Montserrat-Bold";
-  src: url("./assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  src: url("../../assets/fonts/Montserrat-Bold.woff2") format("woff2");
 }
 
 ::selection {
