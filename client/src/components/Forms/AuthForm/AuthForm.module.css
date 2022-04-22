@@ -6,6 +6,11 @@
   font-size: 2rem;
 }
 
+.message {
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
 .inputBlock {
   display: flex;
   flex-direction: column;
@@ -15,4 +20,10 @@
 .authForm h1 {
   font-size: 2.4rem;
   text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .message {
+    font-size: 2rem;
+  }
 }
