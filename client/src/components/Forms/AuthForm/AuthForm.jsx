@@ -27,10 +27,7 @@ const AuthForm = (props) => {
         />
       </div>
       {props.formSubmitButton}
-      { props.message
-        ? <p className={styles.message}>{props.message}</p>
-        : null
-      }
+      {props.message && <p className={styles.message}>{props.message}</p>}
     </form>
   );
 }
