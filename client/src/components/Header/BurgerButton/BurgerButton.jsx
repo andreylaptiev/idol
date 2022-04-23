@@ -1,22 +1,18 @@
-import React, { useContext } from 'react';
-import { NavbarContext } from '../../../contexts/NavbarContext';
+import React from 'react';
 import styles from './BurgerButton.module.css';
 const classNames = require('classnames');
 
-const BurgerButton = () => {
-  const [isActive, setIsActive] = useContext(NavbarContext);
-
-  const handleClick = () => setIsActive(!isActive);
-
+const BurgerButton = (props) => {
+  // burger button styles
   let btnClass = classNames({
     [styles.burgerBtn]: true,
-    [styles.burgerBtn_active]: isActive
+    [styles.burgerBtn_active]: props.isActive
   });
 
   return (
-    <button onClick={handleClick} className={btnClass}>
+    <button onClick={props.handleClick} className={btnClass}>
       <img
-        src={ (isActive) ? "./cross-icon.svg" : "./menu-icon.svg" }
+        src={ (props.isActive) ? "./cross-icon.svg" : "./menu-icon.svg" }
         alt="menu button"
       />
     </button>

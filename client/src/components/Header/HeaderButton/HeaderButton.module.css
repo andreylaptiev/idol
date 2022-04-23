@@ -1,4 +1,4 @@
-.btn {
+.linkBtn {
   background-color: inherit;
   border: 1px solid #000;
   display: inline;
@@ -7,20 +7,7 @@
   text-align: center;
 }
 
-.btn:hover {
+.linkBtn:hover {
   box-shadow: 5px 5px #000;
   transform: translate(-5px, -5px);
-}
-
-.headerBtns {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-@media (min-width: 768px) {
-  .headerBtns {
-    flex-direction: row;
-    margin-left: auto;
-  }
 }

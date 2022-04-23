@@ -1,34 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <nav className={styles.navbar}>
-      <NavLink
-        to='news'
-        className={({ isActive }) =>
-          isActive ? styles.activeLink : undefined
-        }
-      >
-        News
-      </NavLink>
-      <NavLink
-        to='gallery'
-        className={({ isActive }) =>
-          isActive ? styles.activeLink : undefined
-        }
-      >
-        Gallery
-      </NavLink>
-      <NavLink
-        to='shop'
-        className={({ isActive }) =>
-          isActive ? styles.activeLink : undefined
-        }
-      >
-        Shop
-      </NavLink>
+      { props.links.map(link => (
+        <NavLink
+          key={link.text}
+          to={link.to}
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : undefined
+          }
+        >
+          {link.text}
+        </NavLink>
+        ))
+      }
     </nav>
   );
 }
