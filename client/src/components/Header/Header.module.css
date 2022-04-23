@@ -14,3 +14,16 @@
   width: 100%;
   padding: 20px 0;
 }
+
+.header__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .header__buttons {
+    flex-direction: row;
+    margin-left: auto;
+  }
+}
