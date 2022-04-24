@@ -3,9 +3,9 @@ const client = require('../db'); // mongodb client
 const jwt = require('jsonwebtoken');
 const generateId = require('../utils/generateId');
 
-function generateJwt(id, email, role) {
+function generateJwt(id, role) {
   const jwtToken = jwt.sign(
-    { id, email, role },
+    { id, role },
     process.env.SECRET_KEY,
     { expiresIn: '1h' }
   );
@@ -86,10 +86,10 @@ class UserController {
       }
 
       // generate token with info about user
-      const token = generateJwt(user._id, user.email, user.role);
+      const token = generateJwt(user._id, user.role);
 
       res.json({
-        message: `Loged In successfully: ${user.email}`,
+        message: `Successful log in: ${user.email}`,
         token: token
       });
     } catch(err) {
