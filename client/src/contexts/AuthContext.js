@@ -8,7 +8,8 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     checkAuth()
-      .then(auth => setIsAuth(auth));
+    .then(auth => setIsAuth(auth))
+    .catch(err => console.error(err));
   }, []);
 
   return (
