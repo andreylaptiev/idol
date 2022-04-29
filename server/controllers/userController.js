@@ -13,6 +13,23 @@ function generateJwt(id, role) {
 }
 
 class UserController {
+  auth(req, res) {
+    if (req.method === 'GET') {
+      // extract token
+      const token = req.headers.authorization.split(' ')[1]; // Bearer token
+      // verify token
+      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        // token is invalid
+        if (err) {
+          console.log(err.message);
+          return res.json({ message: 'User is not authenticated' });
+        }
+        // token is decoded and validated successfully
+        return res.json({ message: 'Success' });
+      });
+    }
+  }
+
   async signup(req, res, next) {
     if (req.method !== 'POST') {
       return next(new Error(`Error: ${req.method} request is not supported`));
