@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
-import AuthForm
-  from '../../components/Forms/AuthForm/AuthForm';
-import Button from '../../components/common/Button/Button';
+import useAuth from '../../hooks/useAuth';
 import { defReq } from '../../axios/instances';
+import AuthForm from '../../components/Forms/AuthForm/AuthForm';
+import Button from '../../components/common/Button/Button';
 import styles from './Auth.module.css';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // message from server displayed to user
   const [message, setMessage] = useState('');
-  const [isAuth, setIsAuth] = useContext(AuthContext);
+  const {setIsAuth} = useAuth();
+
   const location = useLocation();
 
   const handleChangeEmail = (e) => {
@@ -35,7 +36,6 @@ const Auth = () => {
         setEmail('');
         setPassword('');
       }
-      // message displayed to user
       setMessage(message);
     } catch(err) {
       console.error(err);
@@ -45,7 +45,6 @@ const Auth = () => {
   const handleSignUp = async () => {
     try {
       const res = await defReq.post('/users/signup', { email, password });
-      // response message from server
       const message = res.data.message;
       setMessage(message);
       setEmail('');
