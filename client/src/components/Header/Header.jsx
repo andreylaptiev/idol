@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import useUser from '../../hooks/useUser';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { NavbarContext } from '../../contexts/NavbarContext';
 import BurgerButton from './BurgerButton/BurgerButton';
@@ -13,6 +14,7 @@ import styles from './Header.module.css';
 const Header = () => {
   const windowWidth = useWindowWidth();
   const {isAuth, setIsAuth} = useAuth();
+  const user = useUser();
   const [isActive, setIsActive] = useContext(NavbarContext);
 
   const location = useLocation();
@@ -30,6 +32,8 @@ const Header = () => {
   // set of header buttons depending whether user is authenticated
   const headerButtons = isAuth
     ? <div className={styles.header__buttons}>
+        {user.role === 'admin' &&
+          <HeaderButton to='admin' text='Admin Panel' />}
         <HeaderButton to='profile/id' text='Profile' />
         <HeaderButton onClick={logout} to={location.pathname} text='Log Out' />
       </div>
