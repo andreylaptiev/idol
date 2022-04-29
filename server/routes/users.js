@@ -3,7 +3,8 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const PageNotFoundError = require('../errors/PageNotFoundError');
 
-// GET and POST methods are handled in a single method
+// request methods are handled in a single method
+router.use('/auth', userController.auth);
 router.use('/login', userController.login);
 router.use('/signup', userController.signup);
 
