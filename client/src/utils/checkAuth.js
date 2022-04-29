@@ -1,8 +1,26 @@
 import { authReq } from "../axios/instances";
+import jwt_decode from 'jwt-decode';
 
-const getToken = () => localStorage.getItem('token');
+const TOKEN = 'token';
 
-const removeToken = () => localStorage.removeItem('token');
+const getToken = () => localStorage.getItem(TOKEN);
+
+const removeToken = () => localStorage.removeItem(TOKEN);
+
+// token contains user id and role
+export const decodeToken = () => {
+  try {
+    const token = getToken();
+    const decodedToken = jwt_decode(token);
+    return decodedToken;
+  } catch (err) {
+    // in case of trouble with token
+    // return an empty object to use it with setUser()
+    // most likely token is just absent. It is removed if
+    // user clicked Log Out button or if his token is not verified by server
+    return {};
+  }
+}
 
 const checkAuth = async () => {
   const token = getToken();
