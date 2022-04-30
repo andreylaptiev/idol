@@ -5,16 +5,18 @@ const AuthContext = createContext();
 
 const AuthProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     checkAuth()
-    .then(auth => setIsAuth(auth))
-    .catch(err => console.error(err));
-  }, []);
+      .then(auth => setIsAuth(auth))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, [isAuth]);
 
   return (
     <AuthContext.Provider value={{isAuth, setIsAuth}}>
-      {props.children}
+      {!loading && props.children}
     </AuthContext.Provider>
   );
 }
