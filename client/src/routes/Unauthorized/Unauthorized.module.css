@@ -1,0 +1,32 @@
+.unauth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 100px;
+}
+
+.unauth__message {
+  font-style: italic;
+}
+
+.unauth__title {
+  font-size: 3.6rem;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .unauth {
+    gap: 50px;
+  }
+
+  .unauth__message {
+    font-size: 1.8rem;
+    font-style: italic;
+  }
+
+  .unauth__title {
+    font-size: 4.4rem;
+  }
+}
