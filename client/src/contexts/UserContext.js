@@ -7,15 +7,19 @@ const UserContext = createContext();
 const UserProvider = (props) => {
   const [user, setUser] = useState({});
   const { isAuth } = useAuth();
+  // continue only after user being set
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  // user context is set here when auth status changes
+  // user context is set here at first render
+  // and when auth status changes
   useEffect(() => {
     setUser(decodeToken());
+    setInitialLoading(false);
   }, [isAuth]);
 
   return (
     <UserContext.Provider value={user}>
-      {props.children}
+      {!initialLoading && props.children}
     </UserContext.Provider>
   );
 }
