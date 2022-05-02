@@ -29,24 +29,29 @@ const Header = () => {
     setIsAuth(false);
   }
 
-  // set of header buttons depending whether user is authenticated
+  // burger button to manage navbar menu on small screens
+  const burgerButton =
+    <BurgerButton isActive={isActive} handleClick={handleClick} />;
+
+  // set of header buttons depending on user authentication status and his role
   const headerButtons = isAuth
-    ? <div className={styles.header__buttons}>
-        {user.role === 'admin' &&
-          <HeaderButton to='admin' text='Admin Panel' />}
-        <HeaderButton to='profile/id' text='Profile' />
-        <HeaderButton onClick={logout} to={location.pathname} text='Log Out' />
-      </div>
-    : <div className={styles.header__buttons}>
+    ? user.role === 'admin'
+      ? <>
+          <HeaderButton to='admin' text='Admin Panel' />
+          <HeaderButton onClick={logout} to={location.pathname} text='Log Out'/>
+        </>
+      : <>
+          <HeaderButton to='profile/id' text='Profile' />
+          <HeaderButton onClick={logout} to={location.pathname} text='Log Out'/>
+        </>
+    : <>
         <HeaderButton to='signup' text='Sign Up' />
         <HeaderButton to='login' text='Log In' />
-      </div>
+      </>;
 
   // sign up, log in and other buttons
   // they are moved to mobile navbar on small screens
-  const buttons = (windowWidth < 768)
-    ? <BurgerButton isActive={isActive} handleClick={handleClick}/>
-    : headerButtons;
+  const buttons = (windowWidth < 768) ? burgerButton : headerButtons;
 
   // navbar links
   const links = [
@@ -61,7 +66,9 @@ const Header = () => {
         <div className={styles.header__inner}>
           <Logo>idol</Logo>
           {(windowWidth > 767) && <Navbar links={links} />}
-          {buttons}
+          <div className={styles.header__buttons}>
+            {buttons}
+          </div>
         </div>
       </header>
       {(windowWidth < 768) &&
