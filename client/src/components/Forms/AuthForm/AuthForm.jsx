@@ -4,7 +4,10 @@ import styles from './AuthForm.module.css';
 
 const AuthForm = (props) => {
   return (
-    <form className={styles.authForm}>
+    <form
+      className={styles.authForm}
+      name={props.title==='Log In' ? 'loginForm' : 'signupForm'}
+    >
       <h1>{props.title}</h1>
       <div className={styles.inputBlock}>
         <label htmlFor="email">Email:</label>
