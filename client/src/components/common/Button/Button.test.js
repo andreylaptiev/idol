@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {cleanup, render, screen} from '@testing-library/react';
 import Button from './Button';
+
+afterEach(() => cleanup);
 
 test('button is rendered and enabled', () => {
   render(<Button />);

@@ -1,10 +1,14 @@
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {cleanup, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Input from './Input';
 
+afterEach(() => cleanup);
+
 test('input renders', () => {
   render(<Input />);
+  const input = screen.getByRole('textbox');
+  expect(input).toBeVisible();
 });
 
 test('type "abc" in input', async () => {
