@@ -4,9 +4,8 @@ import styles from './NavbarMobile.module.css';
 
 const NavbarMobile = (props) => {
   return (
-    (props.isActive) &&
-      <nav onClick={props.handleClick} className={styles.navbarMobile}>
-        {props.links.map(link => (
+    <nav onClick={props.handleClick} className={styles.navbarMobile}>
+      {props.links.map(link => (
         <NavLink
           key={link.text}
           to={link.to}
@@ -16,10 +15,9 @@ const NavbarMobile = (props) => {
         >
           {link.text}
         </NavLink>
-        ))
-        }
-        {props.headerButtons}
-      </nav>
+      ))}
+      {props.headerButtons}
+    </nav>
   );
 }
 

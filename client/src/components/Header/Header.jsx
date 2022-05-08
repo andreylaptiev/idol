@@ -71,11 +71,10 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {(windowWidth < 768) &&
+      {windowWidth < 768 && isActive &&
         <NavbarMobile
           headerButtons={headerButtons}
           handleClick={handleClick}
-          isActive={isActive}
           links={links}
         />
       }
