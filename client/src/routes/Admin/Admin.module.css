@@ -1,0 +1,15 @@
+.adminNavbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #000;
+  font-size: 1.8rem;
+  padding: 20px 0;
+}
+
+@media (min-width: 768px) {
+  .adminNavbar {
+    gap: 50px;
+  }
+}
