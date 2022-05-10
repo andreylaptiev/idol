@@ -13,3 +13,8 @@
 input[type='password'] {
   font-family: sans-serif;
 }
+
+/* hide ugly default file input and trigger it with button */
+input[type='file'] {
+  display: none;
+}
