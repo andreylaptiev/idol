@@ -21,7 +21,9 @@ class GalleryController {
       // respond if success
       res.send(`Uploaded successfully: ${imageName}`);
     } catch(err) {
-      // pass error to error handling middleware
+      // in case of any error send error status 500
+      res.sendStatus(500);
+      // and pass error to error handling middleware
       next(err);
     }
   }
