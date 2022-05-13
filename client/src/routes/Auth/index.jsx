@@ -11,7 +11,7 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   // message from server displayed to user
   const [message, setMessage] = useState('');
-  const {setIsAuth} = useAuth();
+  const {setAuthToTrue} = useAuth();
 
   const location = useLocation();
 
@@ -32,7 +32,7 @@ const Auth = () => {
       // in case of successful request server sends token
       if (token) {
         localStorage.setItem('token', token);
-        setIsAuth(true);
+        setAuthToTrue();
         setEmail('');
         setPassword('');
       }

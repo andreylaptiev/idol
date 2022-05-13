@@ -13,7 +13,7 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const windowWidth = useWindowWidth();
-  const {isAuth, setIsAuth} = useAuth();
+  const {isAuth, setAuthToFalse} = useAuth();
   const user = useUser();
   const {isActive, triggerNavbar} = useContext(NavbarContext);
 
@@ -23,7 +23,7 @@ const Header = () => {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('token');
-    setIsAuth(false);
+    setAuthToFalse();
   }
 
   // burger button to manage navbar menu on small screens

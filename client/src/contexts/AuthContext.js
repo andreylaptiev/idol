@@ -14,8 +14,12 @@ const AuthProvider = (props) => {
       .finally(() => setLoading(false));
   }, [isAuth]);
 
+  const setAuthToFalse = () => setIsAuth(false);
+
+  const setAuthToTrue = () => setIsAuth(true);
+
   return (
-    <AuthContext.Provider value={{isAuth, setIsAuth}}>
+    <AuthContext.Provider value={{ isAuth, setAuthToFalse, setAuthToTrue }}>
       {!loading && props.children}
     </AuthContext.Provider>
   );
