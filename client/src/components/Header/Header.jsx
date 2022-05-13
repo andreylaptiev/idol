@@ -15,12 +15,9 @@ const Header = () => {
   const windowWidth = useWindowWidth();
   const {isAuth, setIsAuth} = useAuth();
   const user = useUser();
-  const [isActive, setIsActive] = useContext(NavbarContext);
+  const {isActive, triggerNavbar} = useContext(NavbarContext);
 
   const location = useLocation();
-
-  // handle mobile navbar status
-  const handleClick = () => setIsActive(!isActive);
 
   // handle user log out
   const logout = (e) => {
@@ -31,7 +28,7 @@ const Header = () => {
 
   // burger button to manage navbar menu on small screens
   const burgerButton =
-    <BurgerButton isActive={isActive} handleClick={handleClick} />;
+    <BurgerButton isActive={isActive} handleClick={triggerNavbar} />;
 
   // set of header buttons depending on user authentication status and his role
   const headerButtons = isAuth
@@ -74,7 +71,7 @@ const Header = () => {
       {windowWidth < 768 && isActive &&
         <NavbarMobile
           headerButtons={headerButtons}
-          handleClick={handleClick}
+          handleClick={triggerNavbar}
           links={links}
         />
       }
