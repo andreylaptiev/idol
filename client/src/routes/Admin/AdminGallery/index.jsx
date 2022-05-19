@@ -7,7 +7,7 @@ import styles from './AdminGallery.module.css';
 const AdminGallery = () => {
   const [images, setImages] = useState();
   // state of 'Save Images' button
-  const [disabled, setDisabled] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   // default file input is set to display: none
   // so we need to trigger it
@@ -20,7 +20,7 @@ const AdminGallery = () => {
   // enable and disable 'Save Images' button
   // depending on whether images are uploaded
   useEffect(() => {
-    images ? setDisabled(false) : setDisabled(true);
+    images ? setIsDisabled(false) : setIsDisabled(true);
   }, [images]);
 
   const handleSave = async (e) => {
@@ -47,12 +47,13 @@ const AdminGallery = () => {
       const imageURL = URL.createObjectURL(imageFiles[i]);
       imageList.push(imageURL);
     }
+    console.log(imageList)
     setImages(imageList);
   }
 
   // map over URLs of uploaded images and preview them
   const uploadedImages = images?.map(
-    (img, i) => <img key={i} src={img} alt='uploaded' />
+    (img) => <img key={img} src={img} alt='uploaded' />
   );
 
   return (
@@ -72,11 +73,12 @@ const AdminGallery = () => {
           onChange={previewImages}
         />
         <div className={styles.uploadSection__btns}>
-          <Button onClick={triggerInput}>Upload Images</Button>
+          <Button onClick={triggerInput} type="button">Upload Images</Button>
           <Button
-            disabled={disabled}
+            disabled={isDisabled}
             id="saveBtn"
             onClick={handleSave}
+            type="button"
           >
             Save Images
           </Button>

@@ -16,7 +16,7 @@ import AdminArticles from './Admin/AdminArticles';
 import AdminGallery from './Admin/AdminGallery';
 import AdminProducts from './Admin/AdminProducts';
 
-function AppRouter() {
+const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

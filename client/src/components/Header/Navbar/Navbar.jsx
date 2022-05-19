@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import exact from 'prop-types-exact';
 import styles from './Navbar.module.css';
 
 const Navbar = (props) => {
@@ -20,5 +22,9 @@ const Navbar = (props) => {
     </nav>
   );
 }
+
+Navbar.propTypes = exact({
+  links: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
+});
 
 export default Navbar;

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import exact from 'prop-types-exact';
 import Input from '../../common/Input/Input';
 import styles from './AuthForm.module.css';
 
@@ -6,7 +8,7 @@ const AuthForm = (props) => {
   return (
     <form
       className={styles.authForm}
-      name={props.title==='Log In' ? 'loginForm' : 'signupForm'}
+      name={props.title === 'Log In' ? 'loginForm' : 'signupForm'}
     >
       <h1>{props.title}</h1>
       <div className={styles.inputBlock}>
@@ -34,5 +36,15 @@ const AuthForm = (props) => {
     </form>
   );
 }
+
+AuthForm.propTypes = exact({
+  formSubmitButton: PropTypes.element.isRequired,
+  handleChangeEmail: PropTypes.func.isRequired,
+  handleChangePassword: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  message: PropTypes.string,
+  password: PropTypes.string,
+});
 
 export default AuthForm;
